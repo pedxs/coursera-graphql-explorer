@@ -67,34 +67,29 @@ def search_graphql(query="python", limit=10):
         "Referer": "https://www.coursera.org/search",
     }
     
-    # This payload structure is based on actual observed GraphQL requests
+    # Corrected GraphQL query based on API error messages
     payload = [
         {
-            "operationName": "DomainSearchQuery",
+            "operationName": "ProductSearch",
             "variables": {
                 "query": query,
                 "start": 0,
                 "limit": limit,
-                "configId": "SEARCH_PAGE",
                 "filters": {}
             },
             "query": """
-            query DomainSearchQuery($query: String!, $start: Int!, $limit: Int!, $configId: String!, $filters: CoursesFilters) {
-              CatalogResultsV2(query: $query, start: $start, limit: $limit, configId: $configId, filters: $filters) {
+            query ProductSearch($query: String!, $start: Int!, $limit: Int!, $filters: CoursesFilters) {
+              CatalogResultsV2(query: $query, start: $start, limit: $limit, filters: $filters) {
                 numResults
                 results {
                   ... on Course {
                     courseId: id
                     name
-                    slug
                     description
                     partners {
                       name
-                      logo
                     }
-                    skills {
-                      name
-                    }
+                    duration
                     rating
                   }
                 }

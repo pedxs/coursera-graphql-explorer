@@ -70,12 +70,37 @@ To effectively use Coursera's GraphQL API, we recommend:
 4. **Build request generator**: Create helper functions to construct valid GraphQL queries
 
 ## Usage
-Run the exploration script:
+
+### Exploration Script
+Run the exploration script to test different query approaches:
 ```bash
 python3 coursera_graphql_test.py
 ```
 
 This will attempt various queries and log the responses and findings to `coursera_api_findings.md`.
+
+### Working Example
+For a working example that successfully retrieves data from Coursera:
+```bash
+python3 coursera_graphql_working.py
+```
+
+This script demonstrates two approaches:
+1. Using Coursera's autocomplete API (simpler, more reliable)
+2. Using the GraphQL API (may require cookies/authentication)
+
+### Complete API Client
+A more comprehensive example with command-line interface and multiple API methods:
+```bash
+python3 example.py --query "machine learning" --limit 5 --topic "computer-science" --output results.json
+```
+
+This script provides:
+- Command-line arguments for customization
+- Three different API methods (autocomplete, GraphQL, browse)
+- Formatted output display
+- Option to save results to a JSON file
+- Full type annotations and documentation
 
 ## Limitations
 Our exploration revealed that this API:

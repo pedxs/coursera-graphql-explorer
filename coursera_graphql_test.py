@@ -13,33 +13,27 @@ def probe_coursera_graphql():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
     }
     
-    # Final attempt with more precise type names based on error messages
+    # Final attempt with corrected fields based on error feedback
     final_attempt_payload = [{
-        "operationName": "Search",
+        "operationName": "ProductSearch",
         "variables": {
-            "requests": [
-                {
-                    "entityType": "PRODUCTS",
-                    "limit": 5,
-                    "disableRecommender": True,
-                    "query": "python"
-                }
-            ]
+            "query": "python",
+            "limit": 5,
+            "start": 0,
+            "filters": {}
         },
         "query": """
-        query Search($requests: [Search_Request!]!) {
-          searchV3(requests: $requests) {
-            request {
-              query
-              entityType
-            }
-            totalCount
-            hits {
-              __typename
-              ... on Search_ProductHit {
+        query ProductSearch($query: String!, $limit: Int!, $start: Int!, $filters: CoursesFilters) {
+          CatalogResultsV2(query: $query, limit: $limit, start: $start, filters: $filters) {
+            numResults
+            results {
+              ... on Course {
                 id
                 name
-                slug
+                description
+                partners {
+                  name
+                }
               }
             }
           }

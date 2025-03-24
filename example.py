@@ -62,33 +62,28 @@ class CourseraAPI:
         """
         endpoint = f"{self.base_url}/graphqlBatch"
         
-        # Based on observed GraphQL queries from browser traffic
+        # Corrected GraphQL query based on API error messages
         payload = [{
-            "operationName": "DomainSearchQuery",
+            "operationName": "ProductSearch",
             "variables": {
                 "query": query,
                 "start": 0,
                 "limit": limit,
-                "configId": "SEARCH_PAGE",
                 "filters": {}
             },
             "query": """
-            query DomainSearchQuery($query: String!, $start: Int!, $limit: Int!, $configId: String!, $filters: CoursesFilters) {
-              CatalogResultsV2(query: $query, start: $start, limit: $limit, configId: $configId, filters: $filters) {
+            query ProductSearch($query: String!, $start: Int!, $limit: Int!, $filters: CoursesFilters) {
+              CatalogResultsV2(query: $query, start: $start, limit: $limit, filters: $filters) {
                 numResults
                 results {
                   ... on Course {
                     courseId: id
                     name
-                    slug
                     description
                     partners {
                       name
-                      logo
                     }
-                    skills {
-                      name
-                    }
+                    duration
                     rating
                   }
                 }
@@ -155,12 +150,15 @@ def display_results(data: Dict[str, Any], result_type: str) -> None:
                 results = data["response"][0]["data"]["CatalogResultsV2"]["results"]
                 for i, course in enumerate(results[:10], 1):
                     print(f"{i}. {course.get('name')}")
-                    print(f"   URL: https://www.coursera.org/learn/{course.get('slug')}")
+                    print(f"   ID: {course.get('courseId')}")
+                    print(f"   Duration: {course.get('duration', 'Not specified')}")
                     partners = [p["name"] for p in course.get("partners", [])]
                     print(f"   Provider: {', '.join(partners)}")
+                    print(f"   Rating: {course.get('rating', 'Not rated')}")
                     print()
-            except (KeyError, IndexError):
-                print("Unable to parse GraphQL results. Raw response:")
+            except (KeyError, IndexError) as e:
+                print(f"Unable to parse GraphQL results: {e}")
+                print("Raw response:")
                 print(json.dumps(data["response"], indent=2))
         else:
             print(f"GraphQL request failed with status code: {data['status_code']}")
