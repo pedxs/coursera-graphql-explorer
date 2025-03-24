@@ -89,15 +89,16 @@ This script demonstrates two approaches:
 1. Using Coursera's autocomplete API (simpler, more reliable)
 2. Using the GraphQL API (may require cookies/authentication)
 
-### Complete API Client
-A more comprehensive example with command-line interface and multiple API methods:
+### Reliable REST API Client
+A more reliable API client that uses REST endpoints instead of GraphQL:
 ```bash
-python3 example.py --query "machine learning" --limit 5 --topic "computer-science" --output results.json
+python3 coursera_working_api.py --search "machine learning" --browse "computer-science" --course "machine-learning" --limit 5 --output results.json
 ```
 
 This script provides:
 - Command-line arguments for customization
-- Three different API methods (autocomplete, GraphQL, browse)
+- Three reliable API methods (search, browse by topic, course details)
+- Robust error handling with fallback mechanisms
 - Formatted output display
 - Option to save results to a JSON file
 - Full type annotations and documentation
