@@ -59,12 +59,11 @@ def menu():
     print_header()
     print("Available Examples:")
     print()
-    print("1. Basic GraphQL test (coursera_graphql_test.py)")
-    print("2. Working examples with reverse-engineered structure (example.py)")
-    print("3. Actual GraphQL query structure (coursera_api_final.py)")
-    print("4. Extract structured course information (coursera_api_final.py --extract)")
-    print("5. Debug mode with request details (coursera_api_final.py --debug)")
-    print("6. Simple test query (test_query.py)")
+    print("1. Reverse-engineered GraphQL query examples (example.py)")
+    print("2. Actual GraphQL query structure (coursera_api_final.py)")
+    print("3. Extract structured course information (coursera_api_final.py --extract)")
+    print("4. Debug mode with request details (coursera_api_final.py --debug)")
+    print("5. Simple test query (test_query.py)")
     print()
     print("Documentation:")
     print("7. View README.md")
@@ -128,27 +127,24 @@ def main():
                 sys.exit(0)
             
             elif choice == '1':
-                run_command("python3 coursera_graphql_test.py")
-            
-            elif choice == '2':
                 query = get_query_input()
                 limit = get_limit_input()
                 run_command(f"python3 example.py --query \"{query}\" --limit {limit}")
             
-            elif choice == '3':
+            elif choice == '2':
                 query = get_query_input()
                 limit = get_limit_input()
                 run_command(f"python3 coursera_api_final.py --query \"{query}\" --limit {limit}")
             
-            elif choice == '4':
+            elif choice == '3':
                 query = get_query_input()
                 run_command(f"python3 coursera_api_final.py --query \"{query}\" --extract")
             
-            elif choice == '5':
+            elif choice == '4':
                 query = get_query_input()
                 run_command(f"python3 coursera_api_final.py --query \"{query}\" --debug")
             
-            elif choice == '6':
+            elif choice == '5':
                 run_command("python3 test_query.py")
             
             elif choice == '7':
