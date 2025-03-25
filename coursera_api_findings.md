@@ -5,7 +5,7 @@
 
 ## Error Details
 ```
-[{"errors":[{"message":"Cannot query field \"searchV3\" on type \"Query\".","locations":[{"line":3,"column":11}],"extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}},{"message":"Cannot query field \"slug\" on type \"Search_ProductHit\".","locations":[{"line":14,"column":17}],"extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}}]}
+[{"errors":[{"message":"Unknown type \"CoursesFilters\". Did you mean \"CourseQueries\"?","locations":[{"line":2,"column":84}],"extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}},{"message":"Cannot query field \"CatalogResultsV2\" on type \"Query\".","locations":[{"line":3,"column":11}],"extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}},{"message":"Unknown type \"Course\". Did you mean \"CoursesV1\"?","locations":[{"line":6,"column":22}],"extensions":{"code":"GRAPHQL_VALIDATION_FAILED"}}]}
 ]
 ```
 
